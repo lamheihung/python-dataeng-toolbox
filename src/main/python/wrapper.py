@@ -1,14 +1,15 @@
 import time
 from functools import wraps
 
+
 def timer(func):
     """Time wrapper to calcaulate the time use for running the functions.
 
     Args:
-        func: the measured function.
+        func (func): The measured function.
 
     Returns:
-        The wrapped function.
+        func: The wrapped function.
     """
     @wraps(func)
     def wrap(*args, **kw):
