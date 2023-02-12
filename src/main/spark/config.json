@@ -1,0 +1,9 @@
+{
+    "environment": "dev",
+    "spark_config": {
+    },
+    "spark_kafka_config": {
+
+    },
+    "bucket_path": "s3a://bucket/path/to/table"
+}
