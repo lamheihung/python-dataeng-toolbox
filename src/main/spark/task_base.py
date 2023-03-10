@@ -1,4 +1,4 @@
-from typing import Union, Optional
+from typing import Union
 import json
 from abc import ABC
 
@@ -10,11 +10,11 @@ class TaskBase(ABC):
         ABC (class): ABC in abc module
     """
     def __init__(self, 
-                 config: Optional[Union[dict, str]]):
+                 config: Union[dict, str]):
         """Constructs all the necessary attributes for the TaskBase.
 
         Args:
-            config (Optional[Union[dict, str]], optional): The dictionary or the json path of the configuration.
+            config (Union[dict, str]): The dictionary of the config or the json path of the configuration.
         """
         super().__init__()
         self.config = config
