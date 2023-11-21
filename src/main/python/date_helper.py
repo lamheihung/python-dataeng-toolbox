@@ -1,4 +1,4 @@
-from typing import Union, Optional
+from typing import Union
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 
@@ -7,17 +7,17 @@ class DateHelper:
     """DateHelper is a class to support date transformation and date list generation.
     """
     def __init__(self, 
-                 input_type: Optional[str]="string", 
-                 input_format: Optional[str]="%Y-%m-%d", 
-                 output_type: Optional[str]="string", 
-                 output_format: Optional[str]="%Y-%m-%d"):
+                 input_type: str="string", 
+                 input_format: str="%Y-%m-%d", 
+                 output_type: str="string", 
+                 output_format: str="%Y-%m-%d"):
         """Constructs all the necessary attributes for the DateHelper.
 
         Args:
-            input_type (Optional[str], optional): Input date type. Defaults to "string".
-            input_format (Optional[str], optional): Input date format for the methods if input_type is string. Defaults to "%Y-%m-%d".
-            output_type (Optional[str], optional): Output date type. Defaults to "string".
-            output_format (Optional[str], optional): Output date format for the methods if output_type is string. Defaults to "%Y-%m-%d".
+            input_type (str, optional): Input date type. Defaults to "string". Defaults to "string".
+            input_format (str, optional): Input date format for the methods if input_type is string. Defaults to "%Y-%m-%d".
+            output_type (str, optional): Output date type. Defaults to "string".
+            output_format (str, optional): Output date format for the methods if output_type is string. Defaults to "%Y-%m-%d".
         """
         self.input_type = input_type
         self.input_format = input_format

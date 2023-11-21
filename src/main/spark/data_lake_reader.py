@@ -15,15 +15,15 @@ class DataLakeReader(SparkEtlCommon):
         SparkEtlCommon (SparkEtlCommon): The foundamental of Spark application.
     """
     def __init__(self,
+                 config: Union[str, dict[str, Union[str, dict[str, str]]]],
                  spark: Optional[SparkSession]=None,
-                 config: Optional[Union[dict, str]]=None,
-                 app_name: Optional[str]='Testing-Spark-App'):
+                 app_name: str='Testing-App'):
         """Constructs all the necessary attributes for the DataLakeReader.
 
         Args:
+            config (Union[str, dict[str, Union[str, dict[str, str]]]]): The dictionary or the json path of the configuration.
             spark (Optional[SparkSession], optional): The configured SparkSession. Defaults to None.
-            config (Optional[Union[dict, str]], optional): The dictionary or the json path of the configuration.. Defaults to None.
-            app_name (Optional[str], optional): The Spark application name. Defaults to 'Testing-Spark-App'.
+            app_name (str, optional): The Spark application name. Defaults to 'Testing-Spark-App'.
         """
         super().__init__(spark=spark, config=config, app_name=app_name)
         self.uri = self.spark.sparkContext._gateway.jvm.java.net.URI
@@ -60,16 +60,15 @@ class DataLakeReader(SparkEtlCommon):
         """
         path = f"{self.get_datalake_basepath()}/{table_type}/{data_category}/{table_category}/{table_name}"
         return path
-    # ------------------------------
-    # parquet
+
     def get_single_parquet_path(self, 
                                 basepath: str, 
-                                input_date: str) -> str:
+                                input_date: datetime) -> str:
         """Get the path of the parquet file.
 
         Args:
             basepath (str): The path of the table.
-            input_date (str): The reading date of the parquet file.
+            input_date (datetime): The reading date of the parquet file.
 
         Returns:
             str: The path of the parquet file.
@@ -112,8 +111,7 @@ class DataLakeReader(SparkEtlCommon):
             ]
         )
         return date_lst
-    # ------------------------------
-    # delta
+
     def get_all_delta_date(self, 
                            path: str) -> list[datetime]:
         """Transform all the 'ts' to corresponding date if the table is in delta format.
