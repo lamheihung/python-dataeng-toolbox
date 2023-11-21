@@ -12,13 +12,13 @@ class SparkEtlCommon(TaskBase):
         TaskBase (TaskBase): The foundamental of application.
     """
     def __init__(self,
-                 config: Union[dict, str],
+                 config: Union[str, dict[str, Union[str, dict[str, str]]]],
                  spark: Optional[SparkSession]=None,
-                 app_name: str='Testing-Spark-App'):
+                 app_name: str='Testing-App'):
         """Constructs all the necessary attributes for the SparkEtlCommon.
 
         Args:
-            config (Union[dict, str]): The dictionary or the json path of the configuration. Defaults to None.
+            config (Union[str, dict[str, Union[str, dict[str, str]]]]): The dictionary or the json path of the configuration. Defaults to None.
             spark (Optional[SparkSession], optional): The configured SparkSession. Defaults to None.
             app_name (str, optional): The Spark application name. Defaults to 'Testing-Spark-App'.
         """
@@ -28,7 +28,7 @@ class SparkEtlCommon(TaskBase):
     # ------------------------------
     # property
     @property
-    def spark(self):
+    def spark(self) -> SparkSession:
         return self._spark
 
     @spark.setter

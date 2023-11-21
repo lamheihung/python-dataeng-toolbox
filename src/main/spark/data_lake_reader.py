@@ -15,13 +15,13 @@ class DataLakeReader(SparkEtlCommon):
         SparkEtlCommon (SparkEtlCommon): The foundamental of Spark application.
     """
     def __init__(self,
-                 config: Union[dict, str],
+                 config: Union[str, dict[str, Union[str, dict[str, str]]]],
                  spark: Optional[SparkSession]=None,
-                 app_name: str='Testing-Spark-App'):
+                 app_name: str='Testing-App'):
         """Constructs all the necessary attributes for the DataLakeReader.
 
         Args:
-            config (Union[dict, str]): The dictionary or the json path of the configuration.
+            config (Union[str, dict[str, Union[str, dict[str, str]]]]): The dictionary or the json path of the configuration.
             spark (Optional[SparkSession], optional): The configured SparkSession. Defaults to None.
             app_name (str, optional): The Spark application name. Defaults to 'Testing-Spark-App'.
         """
@@ -60,16 +60,15 @@ class DataLakeReader(SparkEtlCommon):
         """
         path = f"{self.get_datalake_basepath()}/{table_type}/{data_category}/{table_category}/{table_name}"
         return path
-    # ------------------------------
-    # parquet
+
     def get_single_parquet_path(self, 
                                 basepath: str, 
-                                input_date: str) -> str:
+                                input_date: datetime) -> str:
         """Get the path of the parquet file.
 
         Args:
             basepath (str): The path of the table.
-            input_date (str): The reading date of the parquet file.
+            input_date (datetime): The reading date of the parquet file.
 
         Returns:
             str: The path of the parquet file.
@@ -112,8 +111,7 @@ class DataLakeReader(SparkEtlCommon):
             ]
         )
         return date_lst
-    # ------------------------------
-    # delta
+
     def get_all_delta_date(self, 
                            path: str) -> list[datetime]:
         """Transform all the 'ts' to corresponding date if the table is in delta format.
